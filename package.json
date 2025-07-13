@@ -20,7 +20,10 @@
   "homepage": "https://github.com/CodeJasper/Development-Diary#readme",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^6.11.1",
     "next": "^15.3.5",
+    "pg": "^8.16.3",
+    "prisma": "^6.11.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -29,6 +32,7 @@
     "@types/react": "19.1.8",
     "eslint": "9.31.0",
     "eslint-config-next": "15.3.5",
+    "ts-node": "^10.9.2",
     "typescript": "5.8.3"
   }
 }
