@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^6.11.1",
+    "bcryptjs": "^3.0.2",
     "next": "^15.3.5",
     "next-auth": "^5.0.0-beta.29",
     "pg": "^8.16.3",
