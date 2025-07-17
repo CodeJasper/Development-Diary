@@ -22,13 +22,16 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^6.11.1",
+    "@tailwindcss/postcss": "^4.1.11",
     "bcryptjs": "^3.0.2",
     "next": "^15.3.5",
     "next-auth": "^5.0.0-beta.29",
     "pg": "^8.16.3",
+    "postcss": "^8.5.6",
     "prisma": "^6.11.1",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@types/node": "24.0.13",
