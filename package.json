@@ -21,6 +21,7 @@
   "homepage": "https://github.com/CodeJasper/Development-Diary#readme",
   "description": "",
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "@prisma/client": "^6.11.1",
     "@tailwindcss/postcss": "^4.1.11",
     "bcryptjs": "^3.0.2",
@@ -31,8 +32,10 @@
     "prisma": "^6.11.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.60.0",
     "resend": "^4.6.0",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@types/node": "24.0.13",
