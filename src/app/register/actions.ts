@@ -9,7 +9,7 @@ import * as yup from "yup"
 import { RegistrationFormProps } from "./page"
 
 const schema = yup.object({
-  userName: yup.string().required("El nombre de usuario es obligatorio"),
+  userName: yup.string().required("El nombre de usuario es obligatorio").matches(/^[a-zA-Z0-9_]+$/, "El nombre de usuario solo puede contener letras, números y guiones bajos"),
   email: yup.string().email("Correo inválido").required("El correo es obligatorio"),
   password: yup.string().min(6, "Mínimo 6 caracteres").required("La contraseña es obligatoria"),
   confirmPassword: yup
@@ -30,6 +30,7 @@ export async function registerUser(_: FormState<RegistrationFormProps>, data: Fo
   const email = data.get('email') as string;
   const userName = data.get('userName') as string;
   const confirmPassword = data.get('confirmPassword') as string;
+
 
   try {
     await schema.validate({ password, email, userName, confirmPassword}, { abortEarly: false });
@@ -55,11 +56,11 @@ export async function registerUser(_: FormState<RegistrationFormProps>, data: Fo
   })
 
   if (existing?.email === email) {
-    return { generalErrors: ["Este correo ya está registrado."] }
+    return { generalErrors: ["Este correo ya está registrado."], data: { email, userName }  }
   }
 
   if (existing?.userName === userName) {
-    return { generalErrors: ["Este nombre de usuario ya está registrado."] }
+    return { generalErrors: ["Este nombre de usuario ya está registrado."], data: { email, userName }  }
   }
 
   const hashed = await hash(password, 10)
