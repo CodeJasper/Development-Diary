@@ -3,6 +3,7 @@
 import { registerUser, FormState } from "@/app/register/actions";
 import * as yup from "yup"
 import { useActionState } from "react"
+import Alert from "@/components/alert/Alert";
 
 export type RegistrationFormProps = {
   userName: string;
@@ -24,7 +25,12 @@ export default function RegisterForm() {
         <img className="h-full w-full object-cover" src="https://images.unsplash.com/photo-1462642109801-4ac2971a3a51?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
       </div>
       <div className="relative max-lg:bg-gray-100 grow shadow-2xl shadow-black/50 z-99 pt-20 lg:w-1/2 xl:w-1/3">
-        <div className="max-lg:absolute max-lg:-top-40 max-lg:left-1/2 max-lg:-translate-x-1/2 bg-white mx-auto lg:w-md max-lg:p-10 max-lg:rounded max-lg:shadow-2xl max-lg:shadow-black/50">
+        <div className="max-lg:max-w-sm max-lg:w-9/10 max-lg:absolute max-lg:-top-40 max-lg:left-1/2 max-lg:-translate-x-1/2 bg-white mx-auto lg:w-md max-lg:p-10 max-lg:rounded max-lg:shadow-2xl max-lg:shadow-black/50">
+          {generalErrors && (
+            generalErrors.map((error) => {
+              return (<Alert className="mb-10" id={`alert_${error}`} text={error} type="ERROR" isDismissible={true} key={`alert_${error}`} />)
+            })
+          )}
           <h1 className="mb-4 text-center text-xl">Registrarse</h1>
           <form
             action={formAction}
@@ -53,6 +59,7 @@ export default function RegisterForm() {
             <div className="form-control">
               <label htmlFor="password" className="form-label">Contraseña:</label>
               <input
+                type="password"
                 name="password"
                 id="password"
                 className="form-field"
@@ -63,6 +70,7 @@ export default function RegisterForm() {
             <div className="form-control">
               <label htmlFor="confirmPassword" className="form-label">Confirmar contraseña:</label>
               <input
+                type="password"
                 name="confirmPassword"
                 id="confirmPassword"
                 className="form-field"

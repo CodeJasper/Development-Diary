@@ -20,7 +20,7 @@
     @apply bg-primary text-white;
   }
 
-  /* Button styles */
+  /* Form styles */
 
   .form-control {
     @apply flex flex-col gap-2;
