@@ -16,7 +16,7 @@ export type RegistrationPayloadProps = Omit<RegistrationFormProps, 'confirmPassw
 
 
 export default function RegisterForm() {
-  const [state, formAction, ] = useActionState(registerUser, {})
+  const [state, formAction] = useActionState(registerUser, {})
   const { fieldErrors, data, generalErrors, success } = state as FormState<RegistrationFormProps>;
 
   return (
@@ -31,54 +31,61 @@ export default function RegisterForm() {
               return (<Alert className="mb-10" id={`alert_${error}`} text={error} type="ERROR" isDismissible={true} key={`alert_${error}`} />)
             })
           )}
-          <h1 className="mb-4 text-center text-xl">Registrarse</h1>
-          <form
-            action={formAction}
-            className="flex flex-col gap-4">
-            <div className="form-control">
-              <label htmlFor="userName" className="form-label">Nombre de usuario</label>
-              <input
-                name="userName"
-                id="userName"
-                className="form-field"
-                defaultValue={data?.userName}
-              />
-              {fieldErrors?.userName && <span className="form-error">{fieldErrors.userName}</span>}
+          <h1 className="mb-4 text-center text-xl">{success ? "Registro exitoso" : "Registrarse"}</h1>
+          {success ? (
+            <div className="flex flex-col items-center gap-10">
+              <p className="text-center">Se ha enviado un link de confirmación al correo {data.email}</p>
+              <a href="/login/" className="w-auto btn btn-lg btn-primary">Iniciar sesión</a>
             </div>
-            <div className="form-control">
-              <label htmlFor="email" className="form-label">Email:</label>
-              <input
-                name="email"
-                id="email"
-                className="form-field"
-                defaultValue={data?.email}
-              />
-              {fieldErrors?.email && <span className="form-error">{fieldErrors.email}</span>}
-            </div>
+          ) : (
+            <form
+              action={formAction}
+              className="flex flex-col gap-4">
+              <div className="form-control">
+                <label htmlFor="userName" className="form-label">Nombre de usuario</label>
+                <input
+                  name="userName"
+                  id="userName"
+                  className="form-field"
+                  defaultValue={data?.userName}
+                />
+                {fieldErrors?.userName && <span className="form-error">{fieldErrors.userName}</span>}
+              </div>
+              <div className="form-control">
+                <label htmlFor="email" className="form-label">Email:</label>
+                <input
+                  name="email"
+                  id="email"
+                  className="form-field"
+                  defaultValue={data?.email}
+                />
+                {fieldErrors?.email && <span className="form-error">{fieldErrors.email}</span>}
+              </div>
 
-            <div className="form-control">
-              <label htmlFor="password" className="form-label">Contraseña:</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="form-field"
-              />
-              {fieldErrors?.password && <span className="form-error">{fieldErrors.password}</span>}
-            </div>
+              <div className="form-control">
+                <label htmlFor="password" className="form-label">Contraseña:</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="form-field"
+                />
+                {fieldErrors?.password && <span className="form-error">{fieldErrors.password}</span>}
+              </div>
 
-            <div className="form-control">
-              <label htmlFor="confirmPassword" className="form-label">Confirmar contraseña:</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                className="form-field"
-              />
-              {!fieldErrors?.password && fieldErrors?.confirmPassword && <span className="form-error">{fieldErrors.confirmPassword}</span>}
-            </div>
-            <button className="btn btn-lg btn-primary" type="submit">Registrarse</button>
-          </form>
+              <div className="form-control">
+                <label htmlFor="confirmPassword" className="form-label">Confirmar contraseña:</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  className="form-field"
+                />
+                {!fieldErrors?.password && fieldErrors?.confirmPassword && <span className="form-error">{fieldErrors.confirmPassword}</span>}
+              </div>
+              <button className="btn btn-lg btn-primary" type="submit">Registrarse</button>
+            </form>
+          )}
         </div>
       </div>
     </div>

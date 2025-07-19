@@ -76,5 +76,5 @@ export async function registerUser(_: FormState<RegistrationFormProps>, data: Fo
   })
 
   sendVerificationEmail(email, token)
-  redirect('/login');
+  return { success: true, data: { email } }
 }
