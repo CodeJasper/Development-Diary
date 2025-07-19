@@ -22,7 +22,7 @@ export async function resendVerification(formData: FormData) {
     where: { email },
     data: {
       verificationToken: token,
-      tokenExpiresAt: new Date(Date.now() + 1000 * 60 * 60), // 1 hora
+      tokenExpiresAt: new Date(Date.now() + 1000 * 60 * 60),
     },
   })
 
