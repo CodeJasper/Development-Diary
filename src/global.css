@@ -33,4 +33,8 @@
   .form-field {
     @apply text-base py-2 px-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary;
   }
+
+  .form-error {
+    @apply text-sm text-red-600;
+  }
 }
