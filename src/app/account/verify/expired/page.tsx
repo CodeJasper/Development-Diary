@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { resendVerification } from '@/app/verify/actions'
+import { resendVerification } from '@/app/account/verify/actions'
 
 export default function ExpiredPage() {
   const [email, setEmail] = useState('')

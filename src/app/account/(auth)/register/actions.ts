@@ -2,11 +2,11 @@
 
 import { hash } from "bcryptjs"
 import { prisma } from "@/lib/prisma"
-import { redirect } from "next/navigation"
 import { generateVerificationToken } from "@/lib/tokens"
 import { sendVerificationEmail } from "@/lib/mail"
 import * as yup from "yup"
 import { RegistrationFormProps } from "./page"
+import { redirect } from "next/navigation"
 
 const schema = yup.object({
   userName: yup.string().required("El nombre de usuario es obligatorio").matches(/^[a-zA-Z0-9_]+$/, "El nombre de usuario solo puede contener letras, números y guiones bajos"),
@@ -76,5 +76,5 @@ export async function registerUser(_: FormState<RegistrationFormProps>, data: Fo
   })
 
   sendVerificationEmail(email, token)
-  return { success: true, data: { email } }
+  redirect(`/account/register/successful?email=${encodeURIComponent(email)}`);
 }
