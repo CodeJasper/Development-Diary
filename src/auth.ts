@@ -6,36 +6,30 @@ import { prisma } from "@/lib/prisma"
 import { compare } from "bcryptjs"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  pages: {
+    signIn: '/account/login',
+  },
   providers: [
     Credentials({
-      credentials: {
-        email: {
-          type: "email",
-          label: "Email",
-          placeholder: "johndoe@gmail.com",
-        },
-        password: {
-          type: "password",
-          label: "Password",
-          placeholder: "*****",
-        },
-      },
       authorize: async (credentials) => {
         const { email, password } = credentials;
         const existingUser = await prisma.user.findUnique({where: { email: email as string }});
 
-        if(!existingUser) {
-          return null;
+        if(!existingUser || !existingUser?.isVerified) {
+          return null
         }
 
-        const hashedPassword = existingUser.password;
-        const isCorrectPassword = await compare(hashedPassword, password as string)
+        const isCorrectPassword = await compare(password as string, existingUser.password)
 
-        if(isCorrectPassword) {
-          return existingUser;
+        if(!isCorrectPassword) {
+          return null
         }
 
-        return null
+        return {
+          id: existingUser.id,
+          email: existingUser.email,
+          name: existingUser.name
+        }
       },
     }),
     Google({
@@ -44,24 +38,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     })],
     callbacks: {
       async signIn(data) {
-        const { profile: { email, family_name, given_name }} = data;
-        const existingUser = await prisma.user.findUnique({ where: { email }})
+        const { account } = data;
+        if (account.provider === 'google') {
+          const { profile: { email, family_name, given_name }} = data;
+          const existingUser = await prisma.user.findUnique({ where: { email }})
 
-        if(existingUser) {
+          if(existingUser) {
+            return true
+          }
+
+          await prisma.user.create({
+            data: {
+              email,
+              userName: email,
+              lastName: family_name,
+              isVerified: true,
+              name: given_name,
+            }
+          })
+
           return true
         }
 
-        await prisma.user.create({
-          data: {
-            email,
-            userName: email,
-            lastName: family_name,
-            isVerified: true,
-            name: given_name,
-          }
-        })
-
-        return true
+        return true;
       }
     },
 })

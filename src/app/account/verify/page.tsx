@@ -60,5 +60,5 @@ export default async function VerifyPage({ searchParams }: Props) {
     },
   })
 
-  redirect('/login?verified')
+  redirect('/account/login?verified=true')
 }
