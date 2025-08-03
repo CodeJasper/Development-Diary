@@ -33,6 +33,7 @@ export default function LoginForm() {
       setError('Las credenciales no coinciden')
     } else {
       router.push('/');
+      router.refresh();
     }
   }
 
