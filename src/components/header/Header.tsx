@@ -19,6 +19,10 @@ const AUTHORIZED_ITEMS = [
     text: 'Perfil',
     route: '/account/profile'
   },
+  {
+    text: 'Crear blog',
+    route: '/posts/new'
+  },
 ]
 
 export default async function Header() {
