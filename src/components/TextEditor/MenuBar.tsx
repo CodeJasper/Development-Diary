@@ -138,7 +138,7 @@ export default function MenuBar({ editor }: { editor: Editor }) {
   ]
 
   return (
-    <div className="bg-white p-4 rounded">
+    <div className="rounded">
       <div className="flex flex-wrap gap-3">
         {buttons.map(({ id, label, command, isActive, canRun = true }) => (
           <button

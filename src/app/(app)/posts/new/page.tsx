@@ -1,36 +1,39 @@
 "use client"
 
-import MenuBar from '@/components/TextEditor/MenuBar'
-import { Editor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import React, { useEffect, useRef, useState } from 'react'
+import TextEditor, { EditorJson } from '@/components/TextEditor/TextEditor'
+import { useRef } from 'react';
 
-const extensions = [StarterKit]
+export default function Page() {
+  const contentEditorJsonRef = useRef<EditorJson | null>(null);
+  const titleEditorJsonRef = useRef<EditorJson | null>(null);
 
-export default () => {
-  const editorRef = useRef<HTMLDivElement | null>(null)
-  const [editor, setEditor] = useState<Editor>(null)
+  const handleUpdateContentEditorJson = (editorJson: EditorJson) => {
+    contentEditorJsonRef.current = editorJson;
+  }
 
-  useEffect(() => {
-    if (editorRef.current && !editor) {
-      const instance = new Editor({
-        element: editorRef.current,
-        extensions,
-        content: '',
-        editorProps: {
-          attributes: {
-            class: 'prose max-w-full h-full focus:outline-none',
-          },
-        },
-      })
-      setEditor(instance)
-    }
-  }, [editorRef, editor])
+  const handleUpdateTitleEditorJson = (editorJson: EditorJson) => {
+    titleEditorJsonRef.current = editorJson;
+  }
 
   return (
-    <div className='h-full flex flex-col'>
-      {editor && <MenuBar editor={editor} />}
-      <div id="editor" ref={editorRef} className='grow-1 bg-white p-4 rounded mt-4 overflow-y-auto h-[calc(100svh-56px-48px-24px-66px-16px)] '></div>
+    <div className="card h-full">
+      <div className="card-body h-full">
+        <div className="h-full flex flex-col gap-4">
+          <div>
+            <p className="text-lg">Nombre</p>
+            <div>
+              <TextEditor handleUpdate={handleUpdateTitleEditorJson} />
+            </div>
+          </div>
+          <hr className="border-gray-400" />
+          <div className="grow-1 flex flex-col">
+            <p className="text-lg">Contenido</p>
+            <div className="grow-1">
+              <TextEditor handleUpdate={handleUpdateContentEditorJson} />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
