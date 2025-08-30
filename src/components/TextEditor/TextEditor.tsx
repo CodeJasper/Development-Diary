@@ -1,22 +1,32 @@
 "use client"
 
 import MenuBar from '@/components/TextEditor/MenuBar'
-import { Editor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import { useEditor } from '@tiptap/react'
 import { Placeholder } from '@tiptap/extensions'
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef } from 'react'
+import { EditorButtonName, ExtensionConfigurations } from '@/components/TextEditor/types'
+import useEditorButtonsState from '@/components/TextEditor/useEditorButtonsState'
 
 export type EditorJson = Record<string, any>
 
 export type TextEditorProps = {
   handleUpdate: (editorJson: EditorJson) => void;
+  buttonNames?: EditorButtonName[];
+  defaultContent?: string;
+  extensionConfigurations: ExtensionConfigurations;
+  placeholderText?: string;
 }
 
 const TextEditor = (props: TextEditorProps) => {
-  const { handleUpdate } = props;
+  const { 
+    handleUpdate,
+    buttonNames = [],
+    extensionConfigurations,
+    defaultContent = "",
+    placeholderText = "Escribe aquí..."
+  } = props;
   const editorRef = useRef<HTMLDivElement | null>(null)
   const editorDebounceRef = useRef(null)
-  const [editor, setEditor] = useState<Editor>(null)
 
   const handleUpdateDebounce = useCallback((editorJson: EditorJson) => {
     if(editorDebounceRef.current) {
@@ -29,31 +39,34 @@ const TextEditor = (props: TextEditorProps) => {
     editorDebounceRef.current = editorDebounce; 
   }, [handleUpdate, editorDebounceRef])
 
-  useEffect(() => {
-    if (editorRef.current && !editor) {
-      const instance = new Editor({
-        element: editorRef.current,
-        onUpdate: (data) => handleUpdateDebounce(data.editor.getJSON()),
-        extensions: [,
-          StarterKit,
-          Placeholder.configure({
-            placeholder: "Escribe aquí...",
-            includeChildren: true,
-          })
-        ],
-        editorProps: {
-          attributes: {
-            class: 'h-full p-4 focus:outline-primary',
-          },
-        },
+  const editor = useEditor({
+    immediatelyRender: false,
+    element: editorRef.current,
+    onUpdate: (data) => handleUpdateDebounce(data.editor.getJSON()),
+    extensions: [
+      ...extensionConfigurations.extensions,
+      Placeholder.configure({
+        placeholder: placeholderText,
+        includeChildren: true,      
       })
-      setEditor(instance)
-    }
-  }, [editorRef, editor, handleUpdateDebounce])
+    ],
+    content: defaultContent,
+    editorProps: {
+      attributes: {
+        class: 'h-full p-4 focus:outline-primary',
+      },
+    },
+  })
+
+  const { buttonConfigurations } = useEditorButtonsState({ 
+    buttonNames: buttonNames,
+    editor: editor,
+    extensionConfigurations: extensionConfigurations
+  }); 
 
   return (
     <div className='h-full flex flex-col'>
-      {editor && <MenuBar editor={editor} />}
+      {editor && <MenuBar buttonConfigurations={buttonConfigurations} />}
       <div className="grow-1 mt-4">
         <div id="editor" ref={editorRef} className='h-full rounded overflow-y-auto'></div>
       </div>
