@@ -3,7 +3,7 @@ version: '3.9'
 services:
   db:
     image: postgres:15
-    container_name: development_diary_postgres_db
+    container_name: development_diary_container
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}

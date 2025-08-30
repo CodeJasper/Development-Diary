@@ -1,0 +1,57 @@
+@theme {
+  --tw-leading: 1.25;
+}
+
+@layer components {
+  h1, h2, h3, h4, h5, h6 {
+    @apply mb-4;
+  }
+
+  h1 {
+    @apply text-6xl;
+  }
+
+  h2 {
+    @apply text-4xl;
+  }
+
+  h3 {
+    @apply text-3xl;
+  }
+
+  h4 {
+    @apply text-2xl;
+  }
+
+  h5 {
+    @apply text-xl;
+  }
+
+  h6 {
+    @apply text-lg;
+  }
+
+  p {
+    @apply text-base mb-4;
+  }
+
+  ul, ol {
+  @apply mb-4 ml-4 list-disc;
+  }
+
+  ul p , ol p  {
+    @apply mb-0;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  pre {
+    @apply mb-4 bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm leading-relaxed shadow-md;
+  }
+}
