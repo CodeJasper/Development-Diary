@@ -42,7 +42,7 @@ export default function Page() {
   return (
     <>
       <h1 className='text-2xl'>Crear Post</h1>
-      <div className="card h-full">
+      <div className="card grow-1">
         <div className="card-body h-full">
           <div className="h-full flex flex-col gap-4">
             <div>
@@ -62,6 +62,9 @@ export default function Page() {
                   handleUpdate={handleUpdateContentEditorJson}
                 />
               </div>
+            </div>
+            <div className='flex justify-end'>
+              <button className='btn btn-primary'>Crear Post</button>
             </div>
           </div>
         </div>

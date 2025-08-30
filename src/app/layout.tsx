@@ -13,9 +13,9 @@ export default function RootLayout({
       <head>
         <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet' />
       </head>
-      <body className="flex flex-col h-dvh">
+      <body className="flex flex-col min-h-dvh">
         <Header />
-        <main className="grow-1">
+        <main className="grow-1 flex">
           {children}
         </main>
       </body>

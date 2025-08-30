@@ -8,8 +8,8 @@ export default function MainAppLayou({
   children: React.ReactNode
 }) {
   return (
-    <div className="bg-gray-100 h-full">
-      <div className="max-w-7xl h-full w-full mx-auto h-full pt-12 px-10 pb-6">
+    <div className="bg-gray-100 grow-1">
+      <div className="max-w-7xl h-full w-full mx-auto pt-12 px-10 pb-6 flex flex-col">
         <AuthProvider>{children}</AuthProvider>
       </div>
     </div>

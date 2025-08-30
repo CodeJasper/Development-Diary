@@ -11,7 +11,7 @@ export default function MenuBar(props: MenuBarProps) {
   const { buttonConfigurations } = props;
 
   return (
-    <div className="rounded">
+    <div className="rounded p-4 sticky bg-white top-0 z-999">
       <div className="flex flex-wrap gap-3">
         {buttonConfigurations.map(({ id, label, command, isActive, canRun = true }) => (
           <button
