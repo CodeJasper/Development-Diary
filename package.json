@@ -41,6 +41,7 @@
     "yup": "^1.6.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.2",
     "@types/node": "24.0.13",
     "@types/react": "19.1.8",
     "eslint": "9.31.0",
