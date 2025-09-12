@@ -27,7 +27,6 @@ const AUTHORIZED_ITEMS = [
 
 export default async function Header() {
 	const session = await auth();
-	console.log(session);
 
 	const getItem = (route: string, text: string) => {
 		return (
