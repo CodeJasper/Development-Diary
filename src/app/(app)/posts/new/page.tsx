@@ -9,6 +9,7 @@ import {
 	extensionConfigurationsPostContent,
 	extensionConfigurationsPostTilte,
 } from "@/components/TextEditor/utils";
+import { PostPost } from "@/lib/services/posts";
 
 const CONTENT_BUTTON_NAMES: EditorButtonName[] = [
 	"blockquote",
@@ -35,6 +36,14 @@ const CONTENT_BUTTON_NAMES: EditorButtonName[] = [
 export default function Page() {
 	const contentEditorJsonRef = useRef<EditorJson | null>(null);
 	const titleEditorJsonRef = useRef<EditorJson | null>(null);
+
+	const handleSavePost = async () => {
+		const response = await PostPost({
+			title: titleEditorJsonRef.current,
+			content: contentEditorJsonRef.current,
+		});
+		console.log(response);
+	};
 
 	const handleUpdateContentEditorJson = (editorJson: EditorJson) => {
 		contentEditorJsonRef.current = editorJson;
@@ -69,7 +78,11 @@ export default function Page() {
 							</div>
 						</div>
 						<div className="flex justify-end">
-							<button type="button" className="btn btn-primary">
+							<button
+								type="button"
+								className="btn btn-primary"
+								onClick={handleSavePost}
+							>
 								Crear Post
 							</button>
 						</div>
