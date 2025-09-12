@@ -4,40 +4,39 @@
 @import "./styles/tiptapEditor.css";
 
 @theme {
-  --color-primary: #F56416;
-  --color-secondary: #DD4B1A;
+	--color-primary: #f56416;
+	--color-secondary: #dd4b1a;
 }
 
 @layer components {
+	/* Button styles */
+	.btn {
+		@apply rounded py-2 px-3 border focus:outline-none focus:ring-2 focus:ring-secondary hover:cursor-pointer;
+	}
 
-  /* Button styles */
-  .btn {
-    @apply rounded py-2 px-3 border focus:outline-none focus:ring-2 focus:ring-secondary hover:cursor-pointer;
-  }
+	.btn-sm {
+		@apply py-1 px-2;
+	}
 
-  .btn-sm {
-    @apply py-1 px-2;
-  }
+	.btn-primary {
+		@apply bg-primary text-white border-primary;
+	}
 
-  .btn-primary {
-    @apply bg-primary text-white border-primary;
-  }
+	/* Form styles */
 
-  /* Form styles */
+	.form-control {
+		@apply flex flex-col gap-2;
+	}
 
-  .form-control {
-    @apply flex flex-col gap-2;
-  }
+	.form-label {
+		@apply text-sm text-gray-700;
+	}
 
-  .form-label {
-    @apply text-sm text-gray-700;
-  }
+	.form-field {
+		@apply text-base py-2 px-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary;
+	}
 
-  .form-field {
-    @apply text-base py-2 px-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary;
-  }
-
-  .form-error {
-    @apply text-sm text-red-600;
-  }
+	.form-error {
+		@apply text-sm text-red-600;
+	}
 }
