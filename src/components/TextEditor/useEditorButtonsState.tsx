@@ -43,7 +43,7 @@ export default function useEditorButtonsState(
 		});
 
 		return headingConfiurations;
-	}, [buttonNames.find, editor.chain, editorState]);
+	}, [buttonNames.find, editor?.chain, editorState]);
 
 	const buttonConfigurations: EditorButtonConfiguration[] = useMemo(() => {
 		return [
@@ -183,7 +183,7 @@ export default function useEditorButtonsState(
 					]
 				: []),
 		];
-	}, [editorState, buttonNames.find, editor.chain, getHeadingConfigurations]);
+	}, [editorState, buttonNames.find, editor?.chain, getHeadingConfigurations]);
 
 	return {
 		buttonStates: editorState,
