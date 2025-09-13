@@ -1,8 +1,9 @@
+import { generateHTML } from "@tiptap/core";
 import { Document } from "@tiptap/extension-document";
 import { Heading } from "@tiptap/extension-heading";
 import Text from "@tiptap/extension-text";
-import type { Editor, EditorStateSnapshot } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import type { Editor, EditorStateSnapshot, JSONContent } from "@tiptap/react";
+import { EDITOR_AVAILABLE_EXTENSIONS } from "@/components/TextEditor/constants";
 import type { ExtensionConfigurations } from "@/components/TextEditor/types";
 
 export const extensionConfigurationsPostTilte: ExtensionConfigurations = {
@@ -22,7 +23,7 @@ export const extensionConfigurationsPostTilte: ExtensionConfigurations = {
 };
 
 export const extensionConfigurationsPostContent: ExtensionConfigurations = {
-	extensions: [StarterKit],
+	extensions: EDITOR_AVAILABLE_EXTENSIONS,
 	handleExtensionStates: (ctx: EditorStateSnapshot<Editor>) => ({
 		isUnderline: ctx.editor?.isActive("underline") ?? false,
 		canUnderline: ctx.editor?.can().chain().toggleUnderline().run() ?? false,
@@ -48,4 +49,8 @@ export const extensionConfigurationsPostContent: ExtensionConfigurations = {
 		canUndo: ctx.editor?.can().chain().undo().run() ?? false,
 		canRedo: ctx.editor?.can().chain().redo().run() ?? false,
 	}),
+};
+
+export const getGeneratedHTML = (content: JSONContent) => {
+	return generateHTML(content, EDITOR_AVAILABLE_EXTENSIONS);
 };
