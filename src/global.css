@@ -1,29 +1,12 @@
 @import "tailwindcss";
+@import "./styles/theme.css";
+@import "./styles/components/buttons.css";
 @import "./styles/font.css";
-@import "./styles/cards.css";
-@import "./styles/tiptapEditor.css";
-
-@theme {
-	--color-primary: #f56416;
-	--color-secondary: #dd4b1a;
-}
+@import "./styles/components/cards.css";
+@import "./styles/components/tiptapEditor.css";
 
 @layer components {
-	/* Button styles */
-	.btn {
-		@apply rounded py-2 px-3 border focus:outline-none focus:ring-2 focus:ring-secondary hover:cursor-pointer;
-	}
-
-	.btn-sm {
-		@apply py-1 px-2;
-	}
-
-	.btn-primary {
-		@apply bg-primary text-white border-primary;
-	}
-
-	/* Form styles */
-
+	/* Form styles */ 
 	.form-control {
 		@apply flex flex-col gap-2;
 	}

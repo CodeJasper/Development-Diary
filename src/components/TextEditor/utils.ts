@@ -52,5 +52,6 @@ export const extensionConfigurationsPostContent: ExtensionConfigurations = {
 };
 
 export const getGeneratedHTML = (content: JSONContent) => {
+	if (!content) return null;
 	return generateHTML(content, EDITOR_AVAILABLE_EXTENSIONS);
 };

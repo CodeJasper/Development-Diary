@@ -9,6 +9,7 @@ import {
 	extensionConfigurationsPostContent,
 	extensionConfigurationsPostTilte,
 } from "@/components/TextEditor/utils";
+import Button from "@/components/ui/button/Button";
 import { PostPost } from "@/lib/services/posts";
 
 const CONTENT_BUTTON_NAMES: EditorButtonName[] = [
@@ -78,13 +79,7 @@ export default function Page() {
 							</div>
 						</div>
 						<div className="flex justify-end">
-							<button
-								type="button"
-								className="btn btn-primary"
-								onClick={handleSavePost}
-							>
-								Crear Post
-							</button>
+							<Button onClick={handleSavePost}>Crear Post</Button>
 						</div>
 					</div>
 				</div>

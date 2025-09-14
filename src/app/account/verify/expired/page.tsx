@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { resendVerification } from "@/app/account/verify/actions";
+import Button from "@/components/ui/button/Button";
+import { ButtonTypes } from "@/components/ui/button/types";
 
 export default function ExpiredPage() {
 	const [email, setEmail] = useState("");
@@ -36,13 +38,9 @@ export default function ExpiredPage() {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
-					<button
-						type="submit"
-						className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-						disabled={loading}
-					>
+					<Button type={ButtonTypes.submit} disabled={loading}>
 						{loading ? "Enviando..." : "Reenviar verificación"}
-					</button>
+					</Button>
 				</form>
 			)}
 		</div>

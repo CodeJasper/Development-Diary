@@ -7,6 +7,8 @@ import {
 } from "@/app/account/(auth)/register/actions";
 import Alert from "@/components/alert/Alert";
 import GoogleButton from "@/components/google_button/GoogleButton";
+import Button from "@/components/ui/button/Button";
+import { ButtonSizes, ButtonTypes } from "@/components/ui/button/types";
 
 export type RegistrationFormProps = {
 	userName: string;
@@ -103,9 +105,9 @@ export default function RegisterForm() {
 						<span className="form-error">{fieldErrors.confirmPassword}</span>
 					)}
 				</div>
-				<button className="btn btn-lg btn-primary" type="submit">
+				<Button size={ButtonSizes.lg} type={ButtonTypes.submit}>
 					Registrarse
-				</button>
+				</Button>
 			</form>
 			<GoogleButton className="mt-4" />
 		</>

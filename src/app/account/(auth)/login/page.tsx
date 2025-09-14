@@ -5,6 +5,8 @@ import { signIn } from "next-auth/react";
 import { type FormEvent, useId, useState } from "react";
 import Alert from "@/components/alert/Alert";
 import GoogleButton from "@/components/google_button/GoogleButton";
+import Button from "@/components/ui/button/Button";
+import { ButtonSizes, ButtonTypes } from "@/components/ui/button/types";
 
 export type LoginFormProps = {
 	email: string;
@@ -78,9 +80,9 @@ export default function LoginForm() {
 						className="form-field"
 					/>
 				</div>
-				<button className="btn btn-lg btn-primary" type="submit">
+				<Button size={ButtonSizes.lg} type={ButtonTypes.submit}>
 					Iniciar sesión
-				</button>
+				</Button>
 			</form>
 			<GoogleButton className="mt-4" />
 		</>

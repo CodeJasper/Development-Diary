@@ -1,0 +1,40 @@
+/*
+  Content:
+  * Palette colors
+*/
+
+/* ---- Palette colors ---- */
+
+@theme {
+  --color-primary-50:  #fff3eb;
+  --color-primary-100: #ffe0d1;
+  --color-primary-200: #ffc2a3;
+  --color-primary-300: #ffa375;
+  --color-primary-400: #ff8547;
+  --color-primary-500: #f56416;
+  --color-primary-600: #d94e0a;
+  --color-primary-700: #b13e08;
+  --color-primary-800: #893006;
+  --color-primary-900: #5a2004;
+
+  --color-secondary-50:  #f9f9f9;
+  --color-secondary-100: #f0f0f0;
+  --color-secondary-200: #e0e0e0;
+  --color-secondary-300: #d1d1d1;
+  --color-secondary-400: #c4c4c4;
+  --color-secondary-500: #a8a8a8;
+  --color-secondary-600: #8c8c8c;
+  --color-secondary-700: #707070;
+  --color-secondary-800: #545454;
+  --color-secondary-900: #383838;
+
+  --color-primary: var(--color-primary-500);
+  --color-primary-light: var(--color-primary-400);
+  --color-primary-dark: var(--color-primary-600);
+  --color-primary-foreground: var(--color-white);
+
+  --color-secondary: var(--color-secondary-400);
+  --color-secondary-light: var(--color-secondary-300);
+  --color-secondary-dark: var(--color-secondary-500);
+  --color-secondary-foreground: var(--color-black);
+}
