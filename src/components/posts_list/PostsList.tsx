@@ -18,7 +18,6 @@ export function PostsList(props: PostsListProps) {
 
 	return (
 		<div>
-			<h1 className="text-2xl font-bold mb-4">Publicaciones recientes</h1>
 			{currentPosts.length === 0 ? (
 				<p>No hay publicaciones disponibles.</p>
 			) : (

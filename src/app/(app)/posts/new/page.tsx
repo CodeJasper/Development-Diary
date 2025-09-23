@@ -10,6 +10,7 @@ import {
 	extensionConfigurationsPostTilte,
 } from "@/components/TextEditor/utils";
 import Button from "@/components/ui/button/Button";
+import PageTitle from "@/components/ui/page_title/PageTitle";
 import { PostPost } from "@/lib/services/posts";
 
 const CONTENT_BUTTON_NAMES: EditorButtonName[] = [
@@ -56,7 +57,7 @@ export default function Page() {
 
 	return (
 		<>
-			<h1 className="text-2xl">Crear Post</h1>
+			<PageTitle title="Crear publicación" />
 			<div className="card grow-1">
 				<div className="card-body h-full">
 					<div className="h-full flex flex-col gap-4">
