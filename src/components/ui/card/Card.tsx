@@ -1,4 +1,7 @@
 import type { PropsWithChildren } from "react";
+import CardBody from "@/components/ui/card/CardBody";
+import CardHeader from "@/components/ui/card/CardHeader";
+import CardFooter from "./CardFooter";
 
 export type CardProps = PropsWithChildren & {
 	className?: string;
@@ -6,11 +9,16 @@ export type CardProps = PropsWithChildren & {
 
 export default function Card(props: CardProps) {
 	const { children, className = "" } = props;
+
 	return (
 		<div
-			className={`rounded-lg border border-gray-200 bg-white p-6 shadow-md ${className}`}
+			className={`bg-white rounded-lg shadow-sm overflow-hidden ${className}`}
 		>
 			{children}
 		</div>
 	);
 }
+
+Card.Header = CardHeader;
+Card.Body = CardBody;
+Card.Footer = CardFooter;

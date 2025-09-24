@@ -32,7 +32,7 @@ export default function Avatar(props: AvatarProps) {
 		/>
 	) : (
 		<div
-			className={`flex items-center justify-center rounded-full bg-gray-300 text-white font-bold ${sizeClasses[size]}`}
+			className={`flex items-center justify-center rounded-full bg-muted ${sizeClasses[size]}`}
 		>
 			{initials || "?"}
 		</div>
