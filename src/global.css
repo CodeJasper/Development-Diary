@@ -5,21 +5,19 @@
 @import "./styles/components/cards.css";
 @import "./styles/components/tiptapEditor.css";
 
-@layer components {
-	/* Form styles */ 
-	.form-control {
-		@apply flex flex-col gap-2;
-	}
+/* Form styles */ 
+@utility form-control {
+	@apply flex flex-col gap-2;
+}
 
-	.form-label {
-		@apply text-sm text-gray-700;
-	}
+@utility form-label {
+	@apply text-sm font-medium text-gray-700;
+}
 
-	.form-field {
-		@apply text-base py-2 px-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary;
-	}
+@utility form-field {
+	@apply bg-input text-lg placeholder:text-muted-foreground md:text-base py-2 px-3 border border-border rounded focus:outline-primary;
+}
 
-	.form-error {
-		@apply text-sm text-red-600;
-	}
+@utility form-error {
+	@apply text-sm text-red-600;
 }

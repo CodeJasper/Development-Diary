@@ -48,6 +48,7 @@
 
   /* Border and input */
   --color-border: var(--color-secondary-200);
-  --color-input: var(--color-secondary-200);
+  --color-input: var(--color-secondary-50);
   --color-ring: var(--color-primary);
+  --color-input-background: var(--color-secondary-800);
 }
