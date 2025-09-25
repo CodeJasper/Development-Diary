@@ -29,12 +29,14 @@ model User {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     Json
-  content   Json
-  published Boolean  @default(false)
-  authorId  String
-  author    User     @relation(fields: [authorId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String    @id @default(cuid())
+  title       Json
+  content     Json
+  published   Boolean   @default(false)
+  authorId    String
+  excerpt     String?   @db.VarChar(255)
+  author      User      @relation(fields: [authorId], references: [id])
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
