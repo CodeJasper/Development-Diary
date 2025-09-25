@@ -11,9 +11,7 @@ export default function Card(props: CardProps) {
 	const { children, className = "" } = props;
 
 	return (
-		<div
-			className={`bg-white rounded-lg shadow-sm overflow-hidden ${className}`}
-		>
+		<div className={`bg-white rounded-lg shadow-sm ${className}`}>
 			{children}
 		</div>
 	);

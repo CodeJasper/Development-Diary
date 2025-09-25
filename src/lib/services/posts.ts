@@ -8,6 +8,7 @@ export async function PostPost(post: ContentPost) {
 		},
 		body: JSON.stringify({
 			title: post.title,
+			excerpt: post.excerpt,
 			content: post.content,
 		}),
 	}).then((res) => res.json());

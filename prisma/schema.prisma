@@ -30,7 +30,7 @@ model User {
 
 model Post {
   id          String    @id @default(cuid())
-  title       Json
+  title       String
   content     Json
   published   Boolean   @default(false)
   authorId    String

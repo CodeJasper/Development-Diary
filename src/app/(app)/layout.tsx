@@ -10,7 +10,7 @@ export default function MainAppLayou({
 	return (
 		<div className="grow-1 flex">
 			<div className="bg-gray-100 grow-1">
-				<div className="max-w-7xl h-full w-full mx-auto pt-12 px-10 pb-6 flex flex-col">
+				<div className="w-full max-w-[90vw] md:w-[80vw] h-full md:max-w-7xl pt-12 mx-auto md:px-10 pb-6 flex flex-col">
 					<AuthProvider>{children}</AuthProvider>
 				</div>
 			</div>

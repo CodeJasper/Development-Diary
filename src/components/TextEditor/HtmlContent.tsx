@@ -7,34 +7,27 @@ import { useEffect, useState } from "react";
 import { getGeneratedHTML } from "@/components/TextEditor/utils";
 
 export type HtmlContent = {
-	title: JsonValue;
+	title: string;
 	content: JsonValue;
 	useMask?: boolean;
 };
 
 export default function HtmlContent(props: HtmlContent) {
 	const { content, title, useMask = false } = props;
-	const [titleHtml, setTitleHtml] = useState<string | null>(null);
 	const [contentHtml, setContentHtml] = useState<string | null>(null);
 
 	useEffect(() => {
-		setTitleHtml(getGeneratedHTML(title as JSONContent));
 		setContentHtml(getGeneratedHTML(content as JSONContent));
-	}, [title, content]);
+	}, [content]);
 
-	if (!titleHtml || !contentHtml) return null;
+	if (!contentHtml) return null;
 
 	const maskClass =
 		contentHtml?.length > 999 && useMask ? "mask-b-from-10%" : "";
 
 	return (
 		<>
-			<div
-				className="mb-8"
-				dangerouslySetInnerHTML={{
-					__html: titleHtml,
-				}}
-			/>
+			<h1>{title}</h1>
 			<div
 				className={`${maskClass} overflow-hidden`}
 				dangerouslySetInnerHTML={{

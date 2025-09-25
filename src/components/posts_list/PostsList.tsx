@@ -10,7 +10,7 @@ export type PostsListProps = {
 
 export function PostsList(props: PostsListProps) {
 	const { initialPosts } = props;
-	const [currentPosts, setCurrentPosts] = useState([]);
+	const [currentPosts, setCurrentPosts] = useState<PostWithAuthor[]>([]);
 
 	useEffect(() => {
 		setCurrentPosts(initialPosts);

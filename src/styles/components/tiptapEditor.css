@@ -1,7 +1,11 @@
 .tiptap .is-editor-empty:first-child::before {
-	color: #adb5bd;
+	@apply text-muted-foreground;
 	content: attr(data-placeholder);
 	float: left;
 	height: 0;
 	pointer-events: none;
+} 
+
+.tiptap {
+	@apply form-field bg-white p-4 rounded-tr-none rounded-tl-none border-t-0;
 }
