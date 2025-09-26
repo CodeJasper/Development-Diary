@@ -7,5 +7,5 @@ export type CardBodyProps = PropsWithChildren & {
 export default function CardBody(props: CardBodyProps) {
 	const { children, className = "" } = props;
 
-	return <div className={`p-8  ${className}`}>{children}</div>;
+	return <div className={`card-body  ${className}`}>{children}</div>;
 }

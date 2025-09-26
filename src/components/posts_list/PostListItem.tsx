@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Card from "@/components/ui/card/Card";
 import PostAuthor from "@/components/ui/post_author/PostAuthor";
@@ -23,7 +24,7 @@ export function PostListItem(props: PostListItemProps) {
 	return (
 		<li key={post.id} className="list-none">
 			<Card>
-				<Card.Body>
+				<Card.Body className="px-4">
 					<PostAuthor
 						authorName={userName}
 						publishedAt={createdAt}
@@ -37,7 +38,10 @@ export function PostListItem(props: PostListItemProps) {
 						className="block mt-4 text-primary hover:text-primary-light font-medium"
 						href={`/posts/${id}`}
 					>
-						Leer artículo completo →
+						<span className="">
+							Leer artículo completo
+							<ChevronRight size={16} className="inline ml-1" />
+						</span>
 					</Link>
 				</Card.Body>
 			</Card>

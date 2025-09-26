@@ -10,11 +10,7 @@ export type CardProps = PropsWithChildren & {
 export default function Card(props: CardProps) {
 	const { children, className = "" } = props;
 
-	return (
-		<div className={`bg-white rounded-lg shadow-sm ${className}`}>
-			{children}
-		</div>
-	);
+	return <div className={`card ${className}`}>{children}</div>;
 }
 
 Card.Header = CardHeader;
