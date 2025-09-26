@@ -1,19 +1,18 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { auth } from "@/auth";
+import { authMiddleware } from "@/lib/middlewares/auth_middleware";
+import { corsMiddleware } from "@/lib/middlewares/cors_middleware";
 
 export async function middleware(request: NextRequest) {
-	const session = await auth();
+	const cors = corsMiddleware(request);
+	if (cors) return cors;
 
-	if (!session) {
-		const loginUrl = new URL("/account/login", request.url);
-		loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
-		return NextResponse.redirect(loginUrl);
-	}
+	const authorization = authMiddleware(request);
+	if (authorization) return authorization;
 
 	return NextResponse.next();
 }
 
 export const config = {
-	matcher: ["/posts/new"],
+	matcher: ["/posts/new", "/api/:path*"],
 };
