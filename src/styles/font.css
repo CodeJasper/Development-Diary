@@ -58,4 +58,8 @@
 	pre {
 		@apply mb-4 bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm leading-relaxed shadow-md;
 	}
+
+	a {
+		@apply hover:text-primary;
+	}
 }

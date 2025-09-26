@@ -11,6 +11,7 @@ export async function getPosts(props: PaginationParams) {
 			id: true,
 			title: true,
 			content: true,
+			excerpt: true,
 			createdAt: true,
 			author: {
 				select: {

@@ -5,6 +5,7 @@ export type PostWithAuthor = Prisma.PostGetPayload<{
 		id: true;
 		title: true;
 		content: true;
+		excerpt: true;
 		createdAt: true;
 		author: {
 			select: {

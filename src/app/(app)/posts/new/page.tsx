@@ -52,12 +52,11 @@ export default function Page() {
 	const [showContentError, setShowContentError] = useState(false);
 
 	const handleSavePost = async (title: string, excerpt: string) => {
-		const response = await PostPost({
+		await PostPost({
 			title: title,
 			excerpt: excerpt,
 			content: contentEditorJsonRef.current,
 		});
-		console.log(response);
 	};
 
 	const handleUpdateContentEditorJson = (editorJson: EditorJson) => {
