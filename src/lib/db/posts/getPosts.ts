@@ -6,7 +6,7 @@ export async function getPosts(props: PaginationParams) {
 	const post = await prisma.post.findMany({
 		skip,
 		take: perPage,
-		orderBy: { createdAt: "desc" },
+		orderBy: [{ createdAt: "desc" }, { id: "desc" }],
 		select: {
 			id: true,
 			title: true,

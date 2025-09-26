@@ -15,3 +15,11 @@ export async function PostPost(post: ContentPost) {
 
 	return response;
 }
+
+export async function GetPosts(page: number) {
+	const response = await fetch(`/api/posts?page=${page}`).then((res) =>
+		res.json(),
+	);
+
+	return response;
+}

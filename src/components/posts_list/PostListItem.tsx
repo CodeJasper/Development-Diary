@@ -22,29 +22,27 @@ export function PostListItem(props: PostListItemProps) {
 	} = post;
 
 	return (
-		<li key={post.id} className="list-none">
-			<Card>
-				<Card.Body className="px-4">
-					<PostAuthor
-						authorName={userName}
-						publishedAt={createdAt}
-						className="mb-8"
-					/>
-					<h2 className="h3">
-						<Link href={`/posts/${id}`}>{title}</Link>
-					</h2>
-					{excerpt && <p className="font-medium">{excerpt}</p>}
-					<Link
-						className="block mt-4 text-primary hover:text-primary-light font-medium"
-						href={`/posts/${id}`}
-					>
-						<span className="">
-							Leer artículo completo
-							<ChevronRight size={16} className="inline ml-1" />
-						</span>
-					</Link>
-				</Card.Body>
-			</Card>
-		</li>
+		<Card>
+			<Card.Body className="px-4">
+				<PostAuthor
+					authorName={userName}
+					publishedAt={createdAt}
+					className="mb-8"
+				/>
+				<h2 className="h3">
+					<Link href={`/posts/${id}`}>{title}</Link>
+				</h2>
+				{excerpt && <p className="font-medium">{excerpt}</p>}
+				<Link
+					className="block mt-4 text-primary hover:text-primary-light font-medium"
+					href={`/posts/${id}`}
+				>
+					<span className="">
+						Leer artículo completo
+						<ChevronRight size={16} className="inline ml-1" />
+					</span>
+				</Link>
+			</Card.Body>
+		</Card>
 	);
 }
