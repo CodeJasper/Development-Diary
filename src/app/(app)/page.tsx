@@ -2,14 +2,16 @@
 
 import { getInitialPosts } from "@/app/actions";
 import { PostsList } from "@/components/posts_list/PostsList";
-import PageTitle from "@/components/ui/page_title/PageTitle";
 
 export default async function Page() {
 	const intialPosts = await getInitialPosts();
 
 	return (
 		<section>
-			<PageTitle title="Publicaciones recientes" />
+			<h1 className="mb-2">Publicaciones recientes</h1>
+			<p className="text-muted-foreground mb-8">
+				Artículos, tutoriales y recursos para desarrolladores web modernos
+			</p>
 			<PostsList initialPosts={intialPosts} />
 		</section>
 	);
