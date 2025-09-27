@@ -29,14 +29,23 @@ model User {
 }
 
 model Post {
-  id          String    @id @default(cuid())
+  id          String      @id @default(cuid())
   title       String
   content     Json
-  published   Boolean   @default(false)
+  published   Boolean     @default(false)
   authorId    String
-  excerpt     String?   @db.VarChar(255)
-  author      User      @relation(fields: [authorId], references: [id])
+  excerpt     String?     @db.VarChar(255)
+  author      User        @relation(fields: [authorId], references: [id])
   publishedAt DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  PostImage   PostImage[]
+}
+
+model PostImage {
+  id       String @id @default(cuid())
+  postId   String
+  imageId  String
+  imageUrl String
+  post     Post   @relation(fields: [postId], references: [id])
 }
