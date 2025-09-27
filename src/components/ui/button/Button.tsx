@@ -1,9 +1,12 @@
 import Link from "next/link";
 import type { PropsWithChildren } from "react";
 import {
+	ButtonColorClasses,
 	ButtonColors,
 	ButtonSizes,
+	ButtonSizesClasses,
 	ButtonTypes,
+	ButtonVariantClasses,
 	ButtonVariants,
 } from "@/components/ui/button/types";
 
@@ -36,9 +39,9 @@ export default function Button(props: ButtonProps) {
 		const classes = [
 			className,
 			"btn",
-			`btn-${size}`,
-			`btn-${variant}`,
-			`btn-${color}`,
+			ButtonSizesClasses[size],
+			ButtonVariantClasses[variant],
+			ButtonColorClasses[color],
 		];
 		return classes.join(" ").trim();
 	};

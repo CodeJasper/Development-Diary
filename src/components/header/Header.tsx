@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { auth } from "@/auth";
-import LogoutNavItem from "./LogoutNavItem";
+import LogoutNavItem from "@/components/header/LogoutNavItem";
+import Button from "@/components/ui/button/Button";
+import { ButtonSizes, ButtonVariants } from "@/components/ui/button/types";
 
 export default async function Header() {
 	const session = await auth();
@@ -35,13 +37,15 @@ export default async function Header() {
 		},
 		{
 			component: (
-				<Link
+				<Button
 					key="create-post"
 					href="/posts/new"
-					className="btn btn-outline-primary self-center"
+					variant={ButtonVariants.outline}
+					size={ButtonSizes.sm}
+					className="self-center"
 				>
 					Crear
-				</Link>
+				</Button>
 			),
 			// component: getItem("Crear", "/posts/new"),
 		},
