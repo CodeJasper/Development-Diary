@@ -15,9 +15,11 @@ import { extensionConfigurationsPostContent } from "@/components/TextEditor/util
 import Button from "@/components/ui/button/Button";
 import { ButtonTypes } from "@/components/ui/button/types";
 import Card from "@/components/ui/card/Card";
+import InputFile from "@/components/ui/forms/file/InputFile";
 import Input from "@/components/ui/forms/input/Input";
 import Textarea from "@/components/ui/forms/textarea/Textarea";
 import { PostPost } from "@/lib/services/posts";
+import { postImage } from "@/lib/services/postsImages";
 
 const CONTENT_BUTTON_NAMES: EditorButtonName[] = [
 	"blockquote",
@@ -47,9 +49,14 @@ export default function Page() {
 	const excerptInputRef = useRef<HTMLTextAreaElement | null>(null);
 	const titleId = useId();
 	const excerptId = useId();
+	const coverImageFileId = useId();
+	const coverImageUrlId = useId();
 	const [showTitleError, setShowTitleError] = useState(false);
 	const [showExcerptError, setShowExcerptError] = useState(false);
 	const [showContentError, setShowContentError] = useState(false);
+	const [showCoverImageUrlError, setShowCoverImageUrlError] = useState(false);
+	const [imageCoverFile, setImageCoverFile] = useState<File | null>(null);
+	const [imageCoverUrl, setImageCoverUrl] = useState("");
 
 	const handleSavePost = async (title: string, excerpt: string) => {
 		await PostPost({
@@ -57,6 +64,10 @@ export default function Page() {
 			excerpt: excerpt,
 			content: contentEditorJsonRef.current,
 		});
+	};
+
+	const handleSaveImage = async (file: File) => {
+		await postImage(file);
 	};
 
 	const handleUpdateContentEditorJson = (editorJson: EditorJson) => {
@@ -95,6 +106,28 @@ export default function Page() {
 		}
 	};
 
+	const handleChangeCoverImageUrl = (e: ChangeEvent<HTMLInputElement>) => {
+		try {
+			setImageCoverFile(null);
+			const url = e.target.value;
+			new URL(url);
+			setShowCoverImageUrlError(false);
+			setImageCoverUrl(url);
+		} catch {
+			setShowCoverImageUrlError(true);
+			setImageCoverUrl("");
+		}
+	};
+
+	const handleChangeCoverImageFile = (e: ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		setImageCoverUrl("");
+		setImageCoverFile(file);
+		setShowCoverImageUrlError(false);
+		titleInputRef.current.value = "";
+		handleSaveImage(file);
+	};
+
 	return (
 		<Card className="grow-1">
 			<Card.Body className="h-full">
@@ -126,6 +159,43 @@ export default function Page() {
 						showError={showExcerptError}
 						onChange={handleChangeExcerpt}
 					/>
+					<div className="flex flex-col gap-2">
+						<InputFile
+							id={coverImageFileId}
+							label="Imagen de portada"
+							labelHelpText="(Mejora la apariencia del artículo)"
+							name="cover_image_file"
+							formFieldClassName="hidden"
+							showButton
+							accept="image/*"
+							maxSizeMB={1}
+							onChange={handleChangeCoverImageFile}
+						/>
+						<Input
+							id={coverImageUrlId}
+							placeholder="https://ejemplo.com/imagen.jpg"
+							ref={titleInputRef}
+							type="url"
+							name="cover_image_url"
+							onChange={handleChangeCoverImageUrl}
+							showError={showCoverImageUrlError}
+							errorMessage="Esta url no es valida"
+						/>
+						{(imageCoverFile || imageCoverUrl) && (
+							<div className="relative h-[200px]">
+								{/** biome-ignore lint/performance/noImgElement: Hosts are not controlled here */}
+								<img
+									className="object-cover rounded-lg w-full h-full"
+									alt="Imagen de portada"
+									src={
+										imageCoverFile
+											? URL.createObjectURL(imageCoverFile)
+											: imageCoverUrl
+									}
+								/>
+							</div>
+						)}
+					</div>
 					<hr className="border-border" />
 					<TextEditor
 						placeholderText="Escribe el contenido del post aquí..."
