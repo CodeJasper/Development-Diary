@@ -43,9 +43,8 @@ model Post {
 }
 
 model PostImage {
-  id       String @id @default(cuid())
-  postId   String
-  imageId  String
+  id       String  @id
+  postId   String?
   imageUrl String
-  post     Post   @relation(fields: [postId], references: [id])
+  post     Post?   @relation(fields: [postId], references: [id])
 }
