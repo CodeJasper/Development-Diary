@@ -39,13 +39,13 @@ model Post {
   publishedAt DateTime?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  PostImage   PostImage[]
+  images      PostImage[]
 }
 
 model PostImage {
-  id       String  @id
-  postId   String?
-  imageUrl String
-  isCover  Boolean @default(false)
-  post     Post?   @relation(fields: [postId], references: [id])
+  id      String  @id
+  postId  String?
+  url     String
+  isCover Boolean @default(false)
+  post    Post?   @relation(fields: [postId], references: [id])
 }
