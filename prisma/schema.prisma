@@ -46,5 +46,6 @@ model PostImage {
   id       String  @id
   postId   String?
   imageUrl String
+  isCover  Boolean @default(false)
   post     Post?   @relation(fields: [postId], references: [id])
 }
