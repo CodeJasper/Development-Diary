@@ -8,7 +8,13 @@ export async function InsertPostInDB(postData: ContentPost, userId: string) {
 			excerpt: postData.excerpt,
 			content: postData.content,
 			authorId: userId,
+			images: postData.imageIds
+				? {
+						connect: postData.imageIds.map((id) => ({ id })),
+					}
+				: undefined,
 		},
+		include: { images: true },
 	});
 
 	return post;

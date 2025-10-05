@@ -4,4 +4,5 @@ export type ContentPost = {
 	title: string;
 	excerpt?: string;
 	content: EditorJson;
+	imageIds?: string[];
 };

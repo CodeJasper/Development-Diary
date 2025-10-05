@@ -47,27 +47,35 @@ export default function Page() {
 	const contentEditorJsonRef = useRef<EditorJson | null>(null);
 	const titleInputRef = useRef<HTMLInputElement | null>(null);
 	const excerptInputRef = useRef<HTMLTextAreaElement | null>(null);
+	const coverImageStorageIdRef = useRef<string | null>(null);
+	const coverImageUrlRef = useRef<HTMLInputElement | null>(null);
 	const titleId = useId();
 	const excerptId = useId();
 	const coverImageFileId = useId();
 	const coverImageUrlId = useId();
 	const [showTitleError, setShowTitleError] = useState(false);
-	const [showExcerptError, setShowExcerptError] = useState(false);
 	const [showContentError, setShowContentError] = useState(false);
 	const [showCoverImageUrlError, setShowCoverImageUrlError] = useState(false);
-	const [imageCoverFile, setImageCoverFile] = useState<File | null>(null);
-	const [imageCoverUrl, setImageCoverUrl] = useState("");
+	const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
+	const [coverImageUrl, setCoverImageUrl] = useState("");
 
 	const handleSavePost = async (title: string, excerpt: string) => {
 		await PostPost({
 			title: title,
 			excerpt: excerpt,
 			content: contentEditorJsonRef.current,
+			imageIds: [coverImageStorageIdRef.current],
 		});
 	};
 
-	const handleSaveImage = async (file: File) => {
-		await postImage(file);
+	const handleSaveCoverImage = async () => {
+		if (!coverImageFile && !coverImageUrl) return;
+
+		const postImageResponse = await postImage(
+			coverImageFile || coverImageUrl,
+			true,
+		);
+		coverImageStorageIdRef.current = postImageResponse.id;
 	};
 
 	const handleUpdateContentEditorJson = (editorJson: EditorJson) => {
@@ -75,17 +83,17 @@ export default function Page() {
 		setShowContentError(!editorJson);
 	};
 
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const form = e.currentTarget;
 		const formData = new FormData(form);
 		const title = formData.get("title") as string;
 		const excerpt = formData.get("excerpt") as string;
 		setShowTitleError(Boolean(!title));
-		setShowExcerptError(Boolean(!excerpt));
 		setShowContentError(Boolean(!contentEditorJsonRef.current));
 
 		if (Boolean(title) && Boolean(contentEditorJsonRef.current)) {
+			await handleSaveCoverImage();
 			handleSavePost(title, excerpt);
 		}
 	};
@@ -98,34 +106,25 @@ export default function Page() {
 		}
 	};
 
-	const handleChangeExcerpt = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		if (showExcerptError && e.target.value) {
-			setShowExcerptError(false);
-		} else if (!e.target.value) {
-			setShowExcerptError(true);
-		}
-	};
-
 	const handleChangeCoverImageUrl = (e: ChangeEvent<HTMLInputElement>) => {
 		try {
-			setImageCoverFile(null);
+			setCoverImageFile(null);
 			const url = e.target.value;
 			new URL(url);
 			setShowCoverImageUrlError(false);
-			setImageCoverUrl(url);
+			setCoverImageUrl(url);
 		} catch {
 			setShowCoverImageUrlError(true);
-			setImageCoverUrl("");
+			setCoverImageUrl("");
 		}
 	};
 
 	const handleChangeCoverImageFile = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
-		setImageCoverUrl("");
-		setImageCoverFile(file);
+		setCoverImageUrl("");
+		setCoverImageFile(file);
 		setShowCoverImageUrlError(false);
-		titleInputRef.current.value = "";
-		handleSaveImage(file);
+		coverImageUrlRef.current.value = "";
 	};
 
 	return (
@@ -156,8 +155,6 @@ export default function Page() {
 						ref={excerptInputRef}
 						maxLength={255}
 						name="excerpt"
-						showError={showExcerptError}
-						onChange={handleChangeExcerpt}
 					/>
 					<div className="flex flex-col gap-2">
 						<InputFile
@@ -174,23 +171,23 @@ export default function Page() {
 						<Input
 							id={coverImageUrlId}
 							placeholder="https://ejemplo.com/imagen.jpg"
-							ref={titleInputRef}
+							ref={coverImageUrlRef}
 							type="url"
 							name="cover_image_url"
 							onChange={handleChangeCoverImageUrl}
 							showError={showCoverImageUrlError}
 							errorMessage="Esta url no es valida"
 						/>
-						{(imageCoverFile || imageCoverUrl) && (
+						{(coverImageFile || coverImageUrl) && (
 							<div className="relative h-[200px]">
 								{/** biome-ignore lint/performance/noImgElement: Hosts are not controlled here */}
 								<img
 									className="object-cover rounded-lg w-full h-full"
 									alt="Imagen de portada"
 									src={
-										imageCoverFile
-											? URL.createObjectURL(imageCoverFile)
-											: imageCoverUrl
+										coverImageFile
+											? URL.createObjectURL(coverImageFile)
+											: coverImageUrl
 									}
 								/>
 							</div>

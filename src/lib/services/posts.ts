@@ -10,6 +10,7 @@ export async function PostPost(post: ContentPost) {
 			title: post.title,
 			excerpt: post.excerpt,
 			content: post.content,
+			imageIds: post.imageIds,
 		}),
 	}).then((res) => res.json());
 
