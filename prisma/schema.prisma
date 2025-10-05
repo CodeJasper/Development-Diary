@@ -43,9 +43,11 @@ model Post {
 }
 
 model PostImage {
-  id      String  @id
-  postId  String?
-  url     String
-  isCover Boolean @default(false)
-  post    Post?   @relation(fields: [postId], references: [id])
+  id       String  @id
+  postId   String?
+  path     String?
+  fullPath String?
+  url      String
+  isCover  Boolean @default(false)
+  post     Post?   @relation(fields: [postId], references: [id])
 }

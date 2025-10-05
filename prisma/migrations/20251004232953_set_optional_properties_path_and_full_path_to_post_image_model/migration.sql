@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "PostImage" ALTER COLUMN "fullPath" DROP NOT NULL,
+ALTER COLUMN "path" DROP NOT NULL;
