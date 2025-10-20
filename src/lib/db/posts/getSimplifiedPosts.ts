@@ -1,12 +1,12 @@
 import type { PaginationParams } from "@/lib/api/pagination";
-import type { PostWithAuthor } from "@/lib/db/posts/types";
+import type { SimplifiedPostWithAuthor } from "@/lib/db/posts/types";
 import { prisma } from "@/lib/prisma";
 
-export async function getPosts(
+export async function getSimplifiedPosts(
 	props: PaginationParams,
-): Promise<PostWithAuthor[]> {
+): Promise<SimplifiedPostWithAuthor[]> {
 	const { perPage, skip } = props;
-	const post = await prisma.post.findMany({
+	const posts = await prisma.post.findMany({
 		skip,
 		take: perPage,
 		orderBy: [{ createdAt: "desc" }, { id: "desc" }],
@@ -29,9 +29,14 @@ export async function getPosts(
 					url: true,
 					isCover: true,
 				},
+				where: { isCover: true },
+				take: 1,
 			},
 		},
 	});
 
-	return post;
+	return posts.map(({ images, ...post }) => ({
+		...post,
+		coverImage: images.length > 0 ? images[0] : null,
+	})) as SimplifiedPostWithAuthor[];
 }

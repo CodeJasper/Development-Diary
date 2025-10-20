@@ -1,10 +1,10 @@
 import { getPaginationParams } from "@/lib/api/pagination";
 import { getPostById } from "@/lib/db/posts/getPostById";
-import { getPosts } from "@/lib/db/posts/getPosts";
+import { getSimplifiedPosts } from "@/lib/db/posts/getSimplifiedPosts";
 
 export async function getInitialPosts() {
 	const paginationParams = getPaginationParams(new URLSearchParams());
-	const posts = await getPosts(paginationParams);
+	const posts = await getSimplifiedPosts(paginationParams);
 	return posts;
 }
 

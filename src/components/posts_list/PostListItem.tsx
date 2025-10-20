@@ -1,13 +1,15 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import Card from "@/components/ui/card/Card";
+import CoverImage from "@/components/ui/cover_image/CoverImage";
 import PostAuthor from "@/components/ui/post_author/PostAuthor";
-import type { PostWithAuthor } from "@/lib/db/posts/types";
+import type { SimplifiedPostWithAuthor } from "@/lib/db/posts/types";
 
 export type PostListItemProps = {
-	post: PostWithAuthor;
+	post: SimplifiedPostWithAuthor;
 };
 
 export function PostListItem(props: PostListItemProps) {
@@ -19,6 +21,7 @@ export function PostListItem(props: PostListItemProps) {
 		id,
 		author: { userName },
 		createdAt,
+		coverImage,
 	} = post;
 
 	return (
@@ -32,6 +35,9 @@ export function PostListItem(props: PostListItemProps) {
 				<h2 className="h3">
 					<Link href={`/posts/${id}`}>{title}</Link>
 				</h2>
+				{coverImage && (
+					<CoverImage src={coverImage.url} alt={title} useNextImage />
+				)}
 				{excerpt && <p className="font-medium">{excerpt}</p>}
 				<Link
 					className="block mt-4 text-primary hover:text-primary-light font-medium"

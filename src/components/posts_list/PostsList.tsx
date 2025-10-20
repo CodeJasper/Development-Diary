@@ -3,22 +3,24 @@
 import { useCallback, useEffect, useState } from "react";
 import { PostListItem } from "@/components/posts_list/PostListItem";
 import Loader from "@/components/ui/loader/Loader";
-import type { PostWithAuthor } from "@/lib/db/posts/types";
+import type { SimplifiedPostWithAuthor } from "@/lib/db/posts/types";
 import { GetPosts } from "@/lib/services/posts";
 
 export type PostsListProps = {
-	initialPosts: PostWithAuthor[];
+	initialPosts: SimplifiedPostWithAuthor[];
 };
 
 const DEFAULT_INDEX_TO_GET_NEXT_PAGE = 3;
 
 export function PostsList(props: PostsListProps) {
 	const { initialPosts } = props;
-	const [currentPosts, setCurrentPosts] = useState<PostWithAuthor[]>([]);
+	const [currentPosts, setCurrentPosts] = useState<SimplifiedPostWithAuthor[]>(
+		[],
+	);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
-	const normalizePost = (post: PostWithAuthor) => {
+	const normalizePost = (post: SimplifiedPostWithAuthor) => {
 		return {
 			...post,
 			createdAt: new Date(post.createdAt),

@@ -15,6 +15,7 @@ import { extensionConfigurationsPostContent } from "@/components/TextEditor/util
 import Button from "@/components/ui/button/Button";
 import { ButtonTypes } from "@/components/ui/button/types";
 import Card from "@/components/ui/card/Card";
+import CoverImage from "@/components/ui/cover_image/CoverImage";
 import InputFile from "@/components/ui/forms/file/InputFile";
 import Input from "@/components/ui/forms/input/Input";
 import Textarea from "@/components/ui/forms/textarea/Textarea";
@@ -179,18 +180,14 @@ export default function Page() {
 							errorMessage="Esta url no es valida"
 						/>
 						{(coverImageFile || coverImageUrl) && (
-							<div className="relative h-[200px]">
-								{/** biome-ignore lint/performance/noImgElement: Hosts are not controlled here */}
-								<img
-									className="object-cover rounded-lg w-full h-full"
-									alt="Imagen de portada"
-									src={
-										coverImageFile
-											? URL.createObjectURL(coverImageFile)
-											: coverImageUrl
-									}
-								/>
-							</div>
+							<CoverImage
+								src={
+									coverImageFile
+										? URL.createObjectURL(coverImageFile)
+										: coverImageUrl
+								}
+								alt={"Imagen de portada"}
+							/>
 						)}
 					</div>
 					<hr className="border-border" />
