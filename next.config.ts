@@ -5,7 +5,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "images.unsplash.com",
+				hostname: process.env.SUPABASE_IMAGE_DOMAIN,
 			},
 		],
 	},
